@@ -75,7 +75,7 @@ movement2 <- movement %>% left_join(mean_by_interval) %>% mutate(steps = ifelse(
 ```{r, echo = T}
 steps_by_day2 <- movement2 %>% group_by(date) %>% summarise(num_steps = sum(steps))
 plot <- steps_by_day2 %>% ggplot(aes(num_steps)) + geom_histogram() + labs(title = "Histogram of steps in a day, with NAs filled in", x = "Number of steps") + theme_bw()
-print(plot)
+suppressMessages(print(plot))
 ```
 
 ### Updated mean and median number of steps, with missing values filled in
@@ -84,7 +84,7 @@ The following calculates the mean and median number of steps, with the missing v
 movement2 %>% summarise(mean_steps = mean(steps), median_steps = median(steps)) %>% print()
 ```
 
-
+knitr::knit2html("PA1_template.Rmd")
 
 ## Are there differences in activity patterns between weekdays and weekends?
 This code creates a new variable to code weekdays versus weekends.

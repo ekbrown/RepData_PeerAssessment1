@@ -1,9 +1,4 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 ## Loading and preprocessing the data
@@ -100,7 +95,7 @@ plot1 <- steps_by_day %>% ggplot(aes(num_steps)) + geom_histogram() + labs(title
 suppressMessages(print(plot1))
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
 
 ### Mean and median number of steps
 The following code produces the mean and median number of steps taken across all days.
@@ -125,7 +120,7 @@ plot2 <- mean_steps_by_interval %>% ggplot(aes(interval, mean_steps)) + geom_lin
 print(plot2)
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
 
 ### Time interval during day with most steps
 The following displays the 5-minute time interval during the day with the largest number of steps.
@@ -173,14 +168,10 @@ movement2 <- movement %>% left_join(mean_by_interval) %>% mutate(steps = ifelse(
 ```r
 steps_by_day2 <- movement2 %>% group_by(date) %>% summarise(num_steps = sum(steps))
 plot <- steps_by_day2 %>% ggplot(aes(num_steps)) + geom_histogram() + labs(title = "Histogram of steps in a day, with NAs filled in", x = "Number of steps") + theme_bw()
-print(plot)
+suppressMessages(print(plot))
 ```
 
-```
-## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
-```
-
-![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png) 
 
 ### Updated mean and median number of steps, with missing values filled in
 The following calculates the mean and median number of steps, with the missing values filled in. These values not differ from the original values, showing that imputing missing values with the mean for the time interval does not change the estimates.
@@ -194,7 +185,7 @@ movement2 %>% summarise(mean_steps = mean(steps), median_steps = median(steps)) 
 ## 1    37.3826            0
 ```
 
-
+knitr::knit2html("PA1_template.Rmd")
 
 ## Are there differences in activity patterns between weekdays and weekends?
 This code creates a new variable to code weekdays versus weekends.
@@ -211,4 +202,4 @@ plot <- mean_steps_by_interval %>% ggplot(aes(interval, mean_steps)) + geom_line
 print(plot)
 ```
 
-![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
